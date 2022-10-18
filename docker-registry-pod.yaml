@@ -8,6 +8,8 @@ spec:
   containers:
   - name: registry
     image: registry:2.6.2
+    ports:
+    - containerPort: 5000
     volumeMounts:
     - name: repo-vol
       mountPath: "/var/lib/registry"
@@ -46,6 +48,9 @@ metadata:
 spec:
   selector:
     app: registry
+  type : LoadBalancer
   ports:
-  - port: 5000
+  - protocol: TCP
+    port: 5000
     targetPort: 5000
+    nodePort : 30001
